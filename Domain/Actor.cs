@@ -25,6 +25,12 @@ public abstract class Actor : IRequestActor<IRequestMessage, ActorRequest>, IDis
 	public void Request( IRequestMessage message ) =>
 		Request( message.ToRequest() );
 
+	public Task RequestAsync( ActorRequest request ) =>
+		Task.Run( () => Request( request ) );
+
+	public Task RequestAsync( IRequestMessage message ) =>
+		RequestAsync( message.ToRequest() );
+
 	/// <summary>
 	///     Blocks the current thread and waits all the requests to be finished
 	/// </summary>
