@@ -1,12 +1,12 @@
 ﻿using System.Collections.Concurrent;
 using System.Reflection;
 
-namespace CxUtils.ActorModel;
+namespace CxActorify;
 
 /// <summary>
 ///     A Concrete implementation of a request actor that handles execution of messages concurrently
 /// </summary>
-public abstract class Actor : IRequestActor<object, ActorRequest>, IDisposable
+public abstract class Actor : IRequestActor<IRequestMessage, ActorRequest>, IDisposable
 {
 	public void Dispose()
 	{
@@ -22,6 +22,9 @@ public abstract class Actor : IRequestActor<object, ActorRequest>, IDisposable
 		TryStartRequestExecutionWorker();
 	}
 
+	public void Request( IRequestMessage message ) =>
+		Request( message.ToRequest() );
+
 	/// <summary>
 	///     Blocks the current thread and waits all the requests to be finished
 	/// </summary>
@@ -34,7 +37,7 @@ public abstract class Actor : IRequestActor<object, ActorRequest>, IDisposable
 	public int RequestCount => _requestCollection.Count;
 
 	readonly BlockingCollection<ActorRequest> _requestCollection = new();
-	
+
 	readonly object _threadLock = new();
 
 	// TODO: change this into async, and return Task when request finished

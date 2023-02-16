@@ -1,9 +1,9 @@
-﻿namespace CxUtils.ActorModel;
+﻿namespace CxActorify;
 
 /// <summary>
 ///     Implements an actor which should allow requesting of messages
 /// </summary>
-public interface IRequestActor<TMessage, in TActorRequest> where TActorRequest : IActorRequest<TMessage>
+public interface IRequestActor<TMessage, in TActorRequest>
 {
 	/// <summary>
 	///     Requests an actor with the given <paramref name="request" />

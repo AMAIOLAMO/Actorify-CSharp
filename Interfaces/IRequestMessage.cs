@@ -1,4 +1,4 @@
-﻿namespace CxUtils.ActorModel;
+﻿namespace CxActorify;
 
 /// <summary>
 ///     An empty interface to represent this object is a request message

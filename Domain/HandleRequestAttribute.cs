@@ -1,4 +1,4 @@
-﻿namespace CxUtils.ActorModel;
+﻿namespace CxActorify;
 
 [AttributeUsage( AttributeTargets.Method )]
 public class HandleRequestAttribute : Attribute
